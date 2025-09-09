@@ -1,16 +1,20 @@
 <script setup>
 import { ref } from 'vue'
 import Typography from '@/components/Typography.vue'
+import { useRouter } from 'vue-router'
+
+const router=useRouter()
 
 //import { add_list } from './Task_form.vue'
     //const list = ref('')
 const get_storage= ref(JSON.parse(localStorage.getItem("list_tache")))
 
 const supp_tache=(id)=>{
-    const tache_reste=ref(get_storage.value.filter(t=>t.id !== id))
-    console.log(tache_reste)
-    localStorage.setItem("list_tache",JSON.stringify(tache_reste.value))
+     get_storage.value=get_storage.value.filter(t=>t.id !== id)
+    localStorage.setItem("list_tache",JSON.stringify(get_storage.value))
+    
 }
+
 
 </script>
 
