@@ -11,7 +11,7 @@ const router = createRouter({
       component: Task_list,
     },
      {
-      path: '/taskform',
+      path: '/taskform/:id',
       name: 'taskform',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
