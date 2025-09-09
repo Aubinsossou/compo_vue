@@ -6,15 +6,15 @@ import { ref } from 'vue'
 const list = ref('')
 const list_tache = ref([])
 
+const get_storage = JSON.parse(localStorage.getItem('list_tache'))
 
-const get_storage= JSON.parse(localStorage.getItem("list_tache"))
-
- const get_tache=()=>{
-    if (!get_storage) {
-            localStorage.setItem("list_tache", JSON.stringify([]))
-        } return JSON.parse(localStorage.getItem("list_tache"))
+const get_tache = () => {
+  if (!get_storage) {
+    localStorage.setItem('list_tache', JSON.stringify([]))
+  }
+  return JSON.parse(localStorage.getItem('list_tache'))
 }
- 
+
 const add_list = () => {
   if (list.value === '') {
     alert('ecrivez une tache a ajouter')
@@ -25,11 +25,11 @@ const add_list = () => {
     }
     list_tache.value.push(list_of_tach)
     console.log(list_tache.value)
-    localStorage.setItem("list_tache", JSON.stringify(list_tache.value))
-    list.value = ""
+    localStorage.setItem('list_tache', JSON.stringify(list_tache.value))
+    list.value = ''
   }
 }
-get_tache();
+get_tache()
 </script>
 
 <template>
@@ -38,7 +38,7 @@ get_tache();
       <Typography tag="h2" text="Form TO-DO-LIST" />
       <div class="form_item">
         <label for="list">Tache à ajouter</label>
-        <input tag="input" v-model="list" type="text" name="list" />
+        <input v-model="list" type="text" name="list" />
       </div>
 
       <div class="form_item">
