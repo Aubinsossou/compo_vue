@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Task_list from '../views/Task_list.vue'
+import Home from '../views/Home.vue'
 
 
 const router = createRouter({
@@ -7,11 +8,16 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
+      component: Home,
+    },
+    {
+      path: '/tasklist',
       name: 'tasklist',
       component: Task_list,
     },
      {
-      path: '/taskform/:id',
+      path: '/taskform/',
       name: 'taskform',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
