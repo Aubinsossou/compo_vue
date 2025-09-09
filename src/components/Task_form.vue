@@ -5,6 +5,7 @@ import { ref } from 'vue'
 
 const list = ref('')
 const list_tache = ref([])
+const terminer=ref(false)
 
 const get_storage = JSON.parse(localStorage.getItem('list_tache'))
 
@@ -22,6 +23,7 @@ const add_list = () => {
     const list_of_tach = {
       id: list_tache.value.length + 1,
       tache: list.value,
+      terminer:terminer,
     }
     list_tache.value.push(list_of_tach)
     console.log(list_tache.value)
@@ -42,7 +44,7 @@ get_tache()
       </div>
 
       <div class="form_item">
-        <button @click.prevent="add_list()">Ajouter une tache</button>
+        <button @click.prevent="add_list()" :disabled="list.length===0">Ajouter une tache</button>
       </div>
     </form>
   </div>
