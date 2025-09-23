@@ -1,14 +1,12 @@
 <script setup>
 import Typography from '@/components/Typography.vue'
-
 import { ref } from 'vue'
 
 const list = ref('')
 const list_tache = ref([])
-const terminer=ref(false)
-
+const terminer = ref(false)
+const list_of_tach=ref({})
 const get_storage = JSON.parse(localStorage.getItem('list_tache'))
-
 const get_tache = () => {
   if (!get_storage) {
     localStorage.setItem('list_tache', JSON.stringify([]))
@@ -20,38 +18,41 @@ const add_list = () => {
   if (list.value === '') {
     alert('ecrivez une tache a ajouter')
   } else {
-    const list_of_tach = {
+     list_of_tach.value = {
       id: list_tache.value.length + 1,
       tache: list.value,
-      terminer:terminer,
+      terminer: terminer,
     }
-    list_tache.value.push(list_of_tach)
-    console.log(list_tache.value)
+    list_tache.value.push(list_of_tach.value)
+    //console.log(list_tache.value)
     localStorage.setItem('list_tache', JSON.stringify(list_tache.value))
     list.value = ''
   }
-}
+}            
 get_tache()
 </script>
 
 <template>
   <div class="auth">
     <form class="form auth-form">
-      <Typography tag="h2" text="Form TO-DO-LIST" />
+      <Typography tag="h1" text="Form TO-DO-LIST" />
       <div class="form_item">
         <label for="list">Tache à ajouter</label>
         <input v-model="list" type="text" name="list" />
       </div>
 
       <div class="form_item">
-        <button @click.prevent="add_list()" :disabled="list.length===0">Ajouter une tache</button>
+        <button
+          @click.prevent="add_list()"
+          :disabled="list.length === 0"
+          :class="{ disable: list.length === 0 }"
+        >
+          Ajouter une tache
+        </button>
       </div>
     </form>
+    <Router-link to="tasklist" style="margin-left: 10px">Voir la liste de taches </Router-link>
   </div>
-
-  <!-- <ul>
-    <li v-for="tache in list_tache">{{tache.tache}}</li>
-  </ul> -->
 </template>
 <style scoped>
 input {
@@ -108,5 +109,10 @@ input:focus {
 }
 .form_item:last-child button:hover {
   background-color: rgba(16, 16, 150, 0.861);
+}
+.disable {
+  background-color: rgb(108, 112, 236) !important;
+  color: white;
+  cursor: default !important;
 }
 </style>
